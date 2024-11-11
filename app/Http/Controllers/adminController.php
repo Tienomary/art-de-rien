@@ -7,11 +7,13 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\site;
 use App\Models\Creation;
 use App\Models\Image;
 use App\Models\Categorie;
+use App\Mail\Contact;
 use App\Models\SubCategorie;
 
 class adminController extends Controller
@@ -247,6 +249,20 @@ class adminController extends Controller
 
         // Retourner une vue partielle avec seulement les créations filtrées
         return view('partials.creation-gallery', compact('creations', 'subCategoryIds'));
+    }
+
+    public function sendContact(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'message' => 'required|string',
+        ]);
+
+        $mailto = json_decode(Site::findOrFail(1)->email, true);
+        Mail::to($mailto['text'])->send(new Contact($validatedData));
+
+        return back()->with('success', 'Votre message a été envoyé avec succès !');
     }
 
 }

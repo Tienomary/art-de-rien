@@ -39,3 +39,8 @@ Route::post('/admin.subcategorie.update', [adminController::class, 'updateSubCat
 Route::post('/admin.roadtrip', [roadtripecontroler::class, 'createRoadTrip'])->name('createroadtrip');
 Route::post('/admin.roadtrip.update/{id}', [roadtripecontroler::class, 'updateRoadTrip'])->name('updateRoadTrip');
 Route::post('/upload-image', [roadtripecontroler::class, 'uploadImage'])->name('ckeditor.upload');
+
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Contact;
+
+Route::post('/contact', [adminController::class, 'sendContact'])->name('contact.send');

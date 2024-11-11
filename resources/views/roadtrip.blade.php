@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('images/art-de-rien.png')}}">
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.0/ckeditor5.css" />
     <link rel="stylesheet" href="https://cdn.ckeditor.com/ckeditor5/43.3.0/classic/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>L'Art de Rien - Contact</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="{{asset('images/art-de-rien.png')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -128,18 +129,22 @@
             <h1 class="text-center">Vous souhaitez me contacter ?</h1>
             <p class="text-center">Vous pouvez me joindre en remplissant le formulaire ci-dessous ou en utilisant mes informations de contact.</p>
             <div class="col-md-6 text-white">
-                <form action="">
+                @if(session('success'))
+                <p class="text-center">{{session('success')}}</p>
+                @endif
+                <form action="{{ route('contact.send') }}" method="POST">
+                    @csrf
                     <div class="mb-3">
                         <label for="name" class="form-label">Nom :</label>
-                        <input type="text" class="form-control" id="name" placeholder="Nom">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nom">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email :</label>
-                        <input type="email" class="form-control" id="email" placeholder="Email">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                     </div>
                     <div class="mb-3">
                         <label for="message" class="form-label">Message :</label>
-                        <textarea class="form-control" id="message" placeholder="Message"></textarea>
+                        <textarea class="form-control" id="message" name="message" placeholder="Message"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Envoyer</button>
                 </form>
@@ -152,6 +157,9 @@
                 <div class="d-flex justify-content-center align-items-center gap-2">
                     <img src="{{asset('images/mail.svg')}}" alt="Artwork 4" loading="lazy" width="20px" height="20px">
                     <p style="margin:0;">{{$donnees->afficherDonnees('email')['text']}}</p>
+                </div>
+                <div class="d-flex justify-content-center align-items-center gap-2">
+                    <img src="{{asset('images/qrcode_art-de-rien.fr.png')}}" alt="Artwork 4" loading="lazy" width="30%" style="border-radius: 15%;">
                 </div>
             </div>
         </div>
