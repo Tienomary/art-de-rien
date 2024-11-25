@@ -26,12 +26,17 @@
                 margin-top: 100px;
             }
         }
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0);
+    border-color: white;
+}
         .navbar {
             background-color: transparent;
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
             z-index: 10;
             transition: all 0.3s;
         }
@@ -54,6 +59,24 @@
             color: #ccc;
         }
     </style>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg" style="background-color: transparent;">
+        <div class="container">
+            <a class="navbar-brand" style="font-weight: 300;" href="{{route('home')}}">L'Art de Rien</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav ms-auto text-center">
+                    <li class="nav-item"><a class="nav-link" href="{{route('home')}}">Acceuil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('mescreations')}}">Mes créations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{route('roadtrip')}}">Mes projets</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="{{route('contact')}}">Me contacter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="rest">
     <div class="stars">
         <div class="star"></div>
         <div class="star"></div>
@@ -107,23 +130,6 @@
         <div class="star"></div>
     </div>
 
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg" style="background-color: transparent;">
-        <div class="container">
-            <a class="navbar-brand" style="font-weight: 300;" href="{{route('home')}}">L'Art de Rien</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation" onclick='changeColor()'>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                <ul class="navbar-nav ms-auto text-center">
-                    <li class="nav-item"><a class="nav-link" href="{{route('home')}}">Acceuil</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('mescreations')}}">Mes créations</a></li>
-                    <li class="nav-item"><a class="nav-link" href="{{route('roadtrip')}}">Projet road-trip</a></li>
-                    <li class="nav-item"><a class="nav-link active" href="{{route('contact')}}">Me contacter</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
     <div class="container text-white rs" style="z-index: 10;">
         <div class="row">
             <h1 class="text-center">Vous souhaitez me contacter ?</h1>
@@ -166,6 +172,27 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</div>
 </body>
+<script>
 
+function changeColor() {
+            var navbar = document.querySelector('.navbar');
+            if (navbar.style.backgroundColor == 'black') {
+                navbar.style.backgroundColor = 'transparent';
+            } else {
+                navbar.style.backgroundColor = 'black';
+            }
+        }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </html>

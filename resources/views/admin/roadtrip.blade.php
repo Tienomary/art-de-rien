@@ -35,6 +35,14 @@ if(isset($_GET['delete'])){
             <label for="title">Titre de l'article :</label>
             <input type="text" name="title" placeholder="Titre de l'article" class="form-control" value="{{$article->titre}}" required>
         </div>
+        <div class="mb-3">
+            <label for="project">Projet :</label>
+            <select name="project" class="form-control">
+                @foreach(DB::table('project')->get() as $project)
+                    <option value="{{$project->id}}" @if($project->id == $article->project_id) selected @endif>{{$project->name}}</option>
+                @endforeach
+            </select>
+        </div>
         <label for="content">Contenu de l'article :</label>
         <textarea name="content" id="editor" rows="10">{{$article->content}}</textarea>
         <button type="submit" class="btn btn-primary mt-3">Mettre à jour</button>
@@ -45,6 +53,17 @@ if(isset($_GET['delete'])){
         <div class="mb-3">
             <label for="title">Titre de l'article :</label>
             <input type="text" name="title" placeholder="Titre de l'article" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="project">Projet :</label>
+            <select name="project" class="form-control">
+                @foreach(DB::table('project')->get() as $project)
+                    <option value="{{$project->id}}">{{$project->name}}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="alert alert-warning">
+            Vous souhaitez créer un projet ? <a href="./admin?page=project">Cliquez ici</a>
         </div>
         <label for="content">Contenu de l'article :</label>
         <textarea name="content" id="editor" rows="10"></textarea>
@@ -58,6 +77,7 @@ if(isset($_GET['delete'])){
                 <tr>
                     <th>Titre</th>
                     <th>Date de création</th>
+                    <th>Projet</th>
                     <th>Actions</th>
                 </tr>
             </thead>
@@ -66,6 +86,13 @@ if(isset($_GET['delete'])){
                     <tr>
                         <td>{{ $article->titre }}</td>
                         <td>{{ $article->created_at->format('d/m/Y à H:i') }}</td>
+                        <td>
+                            @if($article->project_id)
+                                {{DB::table('project')->where('id', $article->project_id)->first()->name}}
+                            @else
+                                Aucun projet
+                            @endif
+                        </td>
                         <td>
                             <a href="./admin?page=roadtrip&edit={{ $article->id }}" class="btn btn-warning">Editer</a>
                             <a href="./admin?page=roadtrip&delete={{ $article->id }}" class="btn btn-danger">Supprimer</a>

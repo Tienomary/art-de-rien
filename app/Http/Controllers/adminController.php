@@ -15,6 +15,7 @@ use App\Models\Image;
 use App\Models\Categorie;
 use App\Mail\Contact;
 use App\Models\SubCategorie;
+use Illuminate\Support\Facades\DB;
 
 class adminController extends Controller
 {
@@ -40,6 +41,21 @@ class adminController extends Controller
                 return redirect('admin')->with('error', 'Email ou mot de passe incorrect.');
             }
         }
+    }
+    public function editSettings(Request $request){
+        $user = Auth::user();
+        if($request->input('email') != ""){
+            $user->email = $request->input('email');
+        }
+        if($request->input('password') != "" && $request->input('password_confirmation') != ""){
+            if($request->input('password') == $request->input('password_confirmation')){
+                $user->password = Hash::make($request->input('password'));
+            }else{
+                return redirect('admin')->with('error', 'Les mots de passe ne correspondent pas.');
+            }
+        }
+        $user->save();
+        return redirect('admin')->with('success', 'Les données ont été mises à jour avec succès.');
     }
     public function updateSite(Request $request){
         // Récupérer les données existantes
@@ -249,6 +265,18 @@ class adminController extends Controller
 
         // Retourner une vue partielle avec seulement les créations filtrées
         return view('partials.creation-gallery', compact('creations', 'subCategoryIds'));
+    }
+    public function addProject(Request $request){
+        DB::table('project')->insert([
+            'name' => $request->input('name')
+        ]);
+        return redirect('admin?page=roadtrip')->with('success', 'Le projet a été ajouté avec succès.');
+    }
+    public function updateProject(Request $request, $id){
+        DB::table('project')->where('id', $id)->update([
+            'name' => $request->input('name')
+        ]);
+        return redirect('admin?page=roadtrip')->with('success', 'Le projet a été modifié avec succès.');
     }
 
     public function sendContact(Request $request)

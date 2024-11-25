@@ -91,7 +91,7 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link active" href="{{route('home')}}">Acceuil</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('mescreations')}}">Mes créations</a></li>
-                        <li class="nav-item"><a class="nav-link" href="{{route('roadtrip')}}">Projet road-trip</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('roadtrip')}}">Mes projets</a></li>
                         <li class="nav-item"><a class="nav-link" href="{{route('contact')}}">Me contacter</a></li>
                     </ul>
                 </div>
@@ -179,7 +179,7 @@
           <ul class="nav col-md-6 justify-content-end" style="color: black;">
             <li class="nav-item"><a href="{{route('home')}}" class="nav-link px-2" style="color: black;">Accueil</a></li>
             <li class="nav-item"><a href="{{route('mescreations')}}" class="nav-link px-2" style="color: black;">Mes créations</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2" style="color: black;">Projet road-trip</a></li>
+            <li class="nav-item"><a href="{{route('roadtrip')}}" class="nav-link px-2" style="color: black;">Mes projets</a></li>
             <li class="nav-item"><a href="{{route('contact')}}" class="nav-link px-2" style="color: black;">Me contacter</a></li>
           </ul>
         </footer>

@@ -20,6 +20,15 @@
 @endphp
 <!-- Navbar -->
 <style>
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0);
+    border-color: white;
+}
     .navbar-brand {
         color: #fff;
         font-weight: bold;
@@ -54,7 +63,7 @@
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item"><a class="nav-link" href="{{route('home')}}">Acceuil</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('mescreations')}}">Mes créations</a></li>
-                <li class="nav-item"><a class="nav-link active" href="{{route('roadtrip')}}">Projet road-trip</a></li>
+                <li class="nav-item"><a class="nav-link active" href="{{route('roadtrip')}}">Mes projets</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{route('contact')}}">Me contacter</a></li>
             </ul>
         </div>
@@ -83,11 +92,9 @@
     }
 </style>
 
-
-
-
-
-
+<?php 
+if(isset($_GET['project'])){
+?>
 <script type="importmap">
     {
         "imports": {
@@ -97,7 +104,7 @@
     }
 </script>
 <div class="container">
-    @foreach (roadtrip::all()->reverse() as $article)
+    @foreach (roadtrip::where('project_id', $_GET['project'])->get()->reverse() as $article)
         <?php
         $content = $article->content; // Texte récupéré de la BDD
         $content = preg_replace_callback(
@@ -116,18 +123,40 @@
         );
 
         ?>
-        <div class="article-container">
+        <div class="article-container" style="display: flex; flex-direction: column;">
             <div class="ck-content">
                 <h2>{{ $article->titre }}</h2>
                 <div class="content">
                     {!! $content !!}
                 </div>
             </div>
-            <div class="date">
+            <div class="date" style="display: block;">
                 <p style="font-size: 12px; color: #666;">{{ $article->created_at->format('d/m/Y à H:i') }}</p>
             </div>
         </div>
     @endforeach
 </div>
+<?php }else{ 
+    if(DB::table('project')->count() == 1){
+        die(redirect('./roadtrip?project='.DB::table('project')->first()->id));
+    }
+    ?>
+    <div class="container">
+        <h2 style="font-family: 'Pinyon Script', cursive;">
+            Parcourez mes différents projets sur lesquels je travaille :
+        </h2>
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 10px;">
+        @foreach(DB::table('project')->get() as $project)
+            <a href="{{route('roadtrip', ['project' => $project->id])}}" class="btn btn-outline-danger" style="flex: 1;">{{$project->name}}</a>
+        @endforeach
+        </div>
+    </div>
+<?php } ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
 </html>

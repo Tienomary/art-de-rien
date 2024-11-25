@@ -1,8 +1,13 @@
 body {
+  min-height: 100vh;
+  background: radial-gradient(ellipse at bottom, #310d0d 0%, #130c0c 100%);
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.rest{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   background: radial-gradient(ellipse at bottom, #310d0d 0%, #130c0c 100%);
   overflow: hidden;
   overflow-y: scroll;

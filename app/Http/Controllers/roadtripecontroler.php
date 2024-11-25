@@ -14,6 +14,7 @@ class roadtripecontroler extends Controller
         $roadtrip = new roadtrip();
         $roadtrip->content = $request->input('content');
         $roadtrip->titre = $request->input('title');
+        $roadtrip->project_id = $request->input('project');
         $roadtrip->save();
         $images = Image::where('article_id', -1)->get();
         foreach($images as $image){
@@ -45,6 +46,7 @@ class roadtripecontroler extends Controller
         $roadtrip = roadtrip::find($id);
         $roadtrip->content = $request->input('content');
         $roadtrip->titre = $request->input('title');
+        $roadtrip->project_id = $request->input('project');
         $roadtrip->save();
         return redirect('./admin?page=roadtrip')->with('success', 'Article mis à jour avec succès');
     }

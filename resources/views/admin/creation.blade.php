@@ -115,7 +115,7 @@
             $image->delete();
         }
         $creation->delete();
-        die(redirect()->route('admin?page=creation')->with('success', 'La création a été supprimée avec succès.'));
+        die(redirect()->back()->with('success', 'La création a été supprimée avec succès.'));
     }else{
     ?>
     <div class="col-md-6 col-sm-12" style="">
